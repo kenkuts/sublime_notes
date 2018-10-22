@@ -1,0 +1,55 @@
+NoSQL - Not Only SQL
+Key-value pairs
+Column Family
+graph
+Document
+
+SQL
+Relational(tables)
+Analytical(OLAP) - 3D arrays
+
+-Structured - organized easy to join
+-Error checkin - enforces relationships
+-Fast Joins:
+	-Cross Indexes 
+	-Query Optimizer
+-Support lots of documentation
+-Stability features aren't changing as much
+-Reporting/analysis across relations
+
+Frameworks:
+SQL:
+Sqlite
+
+
+NoSQL: 
+MongoDB
+
+
+
+ActiveRecord Association Notes:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
