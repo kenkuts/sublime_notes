@@ -63,7 +63,7 @@ HTML/ERB:
 
   <p><input type="text" name="user_name" id="user_name" /></p>
 
-  <input type="submit" value="Submit"/>
+  <input type="submit" value="Submit"/> 
 </form>
 
 When the user submit this post request we need to create a route for it in our controller.
@@ -104,6 +104,45 @@ called params.
 
 The key of hash is determined by the symbol in the url(:id), and the associated value will be the content in the url provided
 by the user. Once inside the controller action we can access the value from the params hash, just like we would any other hash.
+
+Defining Routes: 
+
+The order in which you define routes in sinatra matters.
+If you were to define the code below to your controller file:
+
+get '/post/:id' do
+  erb :"post/show.html"
+end
+
+get '/post/new' do
+  erb :"post/new"
+end
+
+If the client sends a request for 'localhost:9393/post/new' there will be an error.
+Because beacuse it will evaluate 'post/new' as 'post/:id' and id => new. 
+To avoid this we need to change the order in which the routers are setup. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
