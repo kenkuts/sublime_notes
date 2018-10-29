@@ -30,14 +30,14 @@ MongoDB
 ActiveRecord Association Notes:
 
 When an object belongs to another object, it always has the foreign key. 
-In this example we have the Son
+In this example we have the songs table belongs_to the Artist table. This means 
+that the song table will have a foreign key of artist_id as one of its columns and an
+artist attribute inside of its class. 
 
 class Song < ActiveRecord::Base
 	belongs_to :artist
 
 end 
-
-
 
 
 

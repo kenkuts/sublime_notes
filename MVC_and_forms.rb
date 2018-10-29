@@ -58,17 +58,27 @@ public Directory:
 	The public directory holds our front-end assets. It holds a css directory with a stylesheet and JS directories and any other
 	front-end assets.
 
+
 ERB:
-	ERB is a templating engine which stands for embedded Ruby. We can write code here just like in a plain old '.html' file.
-	Sinatra is configured by default to look for our '.erb' files in a directory called 'views'.
 
-	To let our controller render our '.erb' file we add the following syntax to our App class:
-	get '/' do
-	  erb :index
-	end
-	This renders the 'index.erb' file at the '/' route. This tells Sinatra to render a file called 'index.erb'
-	inside of a directory called 'views'
+ERB is a templating engine which stands for embedded Ruby. We can write code here just like in a plain old '.html' file.
+Sinatra is configured by default to look for our '.erb' files in a directory called 'views'.
 
+To let our controller render our '.erb' file we add the following syntax to our App class:
+get '/' do
+  erb :index
+end
+This renders the 'index.erb' file at the '/' route. This tells Sinatra to render a file called 'index.erb'
+inside of a directory called 'views'. 
+
+By convention we keep our roputes and our erb files named the same. This makes it easier to keep track of
+them as our projects get bigger. 
+
+The line erb :index tells the application to render, or deliver to the users browser, the file in 'views/index.erb'.
+This is a sinatra-provided functionality that renders ERB templates located in the views directroy. 
+Sinatra will automatically look for the '.erb' extension when you call erb in the controller.
+
+ERB Video Notes:
 
 
 
