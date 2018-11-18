@@ -58,34 +58,19 @@ public Directory:
 	The public directory holds our front-end assets. It holds a css directory with a stylesheet and JS directories and any other
 	front-end assets.
 
+Forms:
+<form action="route url to where the form is going" method="how its going to get there, POST, GET, PUT, DELETE">
+	<label for="input_box">Title</label> # If you click the word title on the browser it will focus on the input_box
+	<input type="text" name="the name of the input" id="input_box"> #the name is where the value of our input gets assigned.
+	<input type="submit">
+</form>
 
-ERB:
+The name is where the value of our input gets assigned. When a user types in data from the input box it
+is stored inside of the name. An example would be if the name="first_name". Then the key to where the data
+would be stored is in params[:first_name]. 
 
-ERB is a templating engine which stands for embedded Ruby. We can write code here just like in a plain old '.html' file.
-Sinatra is configured by default to look for our '.erb' files in a directory called 'views'.
-
-To let our controller render our '.erb' file we add the following syntax to our App class:
-get '/' do
-  erb :index
-end
-This renders the 'index.erb' file at the '/' route. This tells Sinatra to render a file called 'index.erb'
-inside of a directory called 'views'. 
-
-By convention we keep our roputes and our erb files named the same. This makes it easier to keep track of
-them as our projects get bigger. 
-
-The line erb :index tells the application to render, or deliver to the users browser, the file in 'views/index.erb'.
-This is a sinatra-provided functionality that renders ERB templates located in the views directroy. 
-Sinatra will automatically look for the '.erb' extension when you call erb in the controller.
-
-ERB Video Notes:
-
-
-
-
-
-
-
+The two most important parts of the form is the action and the method. action is where the data from the form is going
+and the method is how its going to get there. 
 
 
 
