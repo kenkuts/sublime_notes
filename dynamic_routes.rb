@@ -89,14 +89,15 @@ get '/hello' do
 	"Hello World!"
 end
 
+
 Dynamic routing is something where we are capturing data from the user. I.E:
 
 get '/hello/:name' do
-	@@name = params[:name]
-	"Hello!, #{@@name}".
+	@name = params[:name]
+	"Hello!, #{@name}".
 end
 
-In sinatra a route is simply an HTTP method/veb that is paired with a URL-matching pattern. 
+In sinatra a route is simply an HTTP method/verb that is paired with a URL-matching pattern. 
 When our application recieves a request, it will match that route to a specific controller action that matches that URL pattern.
 URL params help us get the text from the URL into the views. That :name in the route name is just a symbol that will be
 filled in with text later. The data is passed from the URL to the controller action through an automatically generated hash
@@ -105,6 +106,44 @@ called params.
 The key of hash is determined by the symbol in the url(:id), and the associated value will be the content in the url provided
 by the user. Once inside the controller action we can access the value from the params hash, just like we would any other hash.
 
+Passing values in the route:
+
+Passing values to a route is as simple as '/square/:number'. If a user types in a url the address 'square/9' this route will square
+the number 9 and turn it generate an output of 81. This is done by using the params variable. 
+
+params[:number] will access the values that are passed in the address. params[:number] == 9 if the user sends 'square/9' in the
+address bar.
+
+
+HTML Form Tag:
+
+The method attribute tells the form what kind of request should be fired to the server when the submit button is clicked. 
+In general, forms use POST request, because it is 'posting' data to the server.
+
+The action attribute tells the form what specific route the post request should be sent to. In this case, were posting 
+to a route called "/food". The "/food" route might have a different erb file to render. The data might be passed via instance
+variables such as '@menu'.
+
+Using Instance Variables:
+Instance Variables allow us to bypass scope between the various methods in a class. Creating an instance variable in a controller
+method(route) lets the contents become 'visible' to the erb file to which it renders. Instead of creating a local variable
+'reversed_string', change is to an instance variable '@reversed_string'.
+
+Instance variables are ONLY passed from the controller method where they are created to the view that is rendered, not 
+between controller methods. 
+
+Rendering using ERB tags
+
+<%= contents %> will display the evaluated expression within the opeining and closing.>
+If an instance variable is passed in the .erb file example is @name you can display the @name instance variable inside the
+.erb file using the <%= @name %> tag. > 
+
+<% contents %> will evaluate the contents of the expression, but will not display them.>
+This tag will evaluate ruby script and will be hidden.
+
+<% @pet_names.each do |pet| %>> #this will be hidden
+	<h2> <%= pet %> </h2> 		# this will display
+<% end %>>						#this will be hidden
 
 
 
