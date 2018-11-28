@@ -72,10 +72,25 @@ would be stored is in params[:first_name].
 The two most important parts of the form is the action and the method. action is where the data from the form is going
 and the method is how its going to get there. 
 
+Models file:
 
+In our models file we store our models. This is where our controller gets our class objects.
+require_relative 'config/environment'
+require_relative 'models/text_analyzer.rb' # We load our path file for models/text_analyzer.rb to our controller
 
+class App < Sinatra::Base
+  get '/' do
+    erb :index
+  end
 
+  post '/' do
+    @analyzed_text = TextAnalyzer.new(params[:user_text]) # We create an object using the users input
+    erb :results
+  end
+end
 
+The @analyzed_text instance variable is then passed to the our results.erb and inside of the results.erb our
+instance object calls the the class methods to change the users input data. 
 
 
 

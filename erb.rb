@@ -77,9 +77,17 @@ Sinatra Lecture Video Notes:
 	
 	The four things you can do with data is CRUD.
 	You can POST(create), GET(retrieve), PUT(update), DELETE.
-	
 
 
+layout.erb:
+
+In order to provide DRY code we use layout.erb. This contains all of the code we want to exist on every single web page.
+
+yield is used to whenever we want the other page content to be loaded into our layout.
+<%= yield %>>
+
+When a controller action is triggered and the 'erb' method is called, it looks to see if there is a view titled layout.erb.
+If the file exists, it loads that content around the desired erb file. 
 
 
 

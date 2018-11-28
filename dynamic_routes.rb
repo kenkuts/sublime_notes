@@ -60,7 +60,7 @@ We are asking the page object to have a form field called 'user_name'.
 HTML/ERB:
 <form action="/greet" method="POST"> # the POST request will contain whatever the user typed into the form's <input> field.
   <label for="user_name">Name:</label> # which is nested within the form and has a name value of user_name, matching our Capybara text expectation.
-
+  # the 'for' attribute for label must correspond with the 'id' attribute for the input.
   <p><input type="text" name="user_name" id="user_name" /></p>
 
   <input type="submit" value="Submit"/> 
@@ -128,66 +128,27 @@ variables such as '@menu'.
 Using Instance Variables:
 Instance Variables allow us to bypass scope between the various methods in a class. Creating an instance variable in a controller
 method(route) lets the contents become 'visible' to the erb file to which it renders. Instead of creating a local variable
-'reversed_string', change is to an instance variable '@reversed_string'.
+'reversed_string', change it to an instance variable '@reversed_string'.
 
 Instance variables are ONLY passed from the controller method where they are created to the view that is rendered, not 
 between controller methods. 
 
-Rendering using ERB tags
-
-<%= contents %> will display the evaluated expression within the opeining and closing.>
-If an instance variable is passed in the .erb file example is @name you can display the @name instance variable inside the
-.erb file using the <%= @name %> tag. > 
-
-<% contents %> will evaluate the contents of the expression, but will not display them.>
-This tag will evaluate ruby script and will be hidden.
-
-<% @pet_names.each do |pet| %>> #this will be hidden
-	<h2> <%= pet %> </h2> 		# this will display
-<% end %>>						#this will be hidden
-=======
 Defining Routes: 
 
 The order in which you define routes in sinatra matters.
 If you were to define the code below to your controller file:
 
 get '/post/:id' do
-  erb :"post/show.html"
+  erb :'post/show.html'
 end
 
 get '/post/new' do
-  erb :"post/new"
+  erb :'post/new'
 end
 
 If the client sends a request for 'localhost:9393/post/new' there will be an error.
 Because beacuse it will evaluate 'post/new' as 'post/:id' and id => new. 
-To avoid this we need to change the order in which the routers are setup. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> 21210e187a7395886b449f72e54ea654e104aa85
-
-
+To avoid this we need to change the order in which the routers are setup.
 
 
 
