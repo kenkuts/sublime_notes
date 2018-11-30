@@ -89,10 +89,19 @@ yield is used to whenever we want the other page content to be loaded into our l
 When a controller action is triggered and the 'erb' method is called, it looks to see if there is a view titled layout.erb.
 If the file exists, it loads that content around the desired erb file. 
 
+ERB Creating Nested forms: 
 
+In ERB if you wanted to create a hash to store and array of hashes it would be as easy as the code below:
 
+  Course Name: <input type="text" name="student[courses][][name]">   # Instead of putting an index to each array 
+  Course Topic: <input type="text" name="student[courses][][topic]"> # we can use an empty array in our form view
+  Course Name: <input type="text" name="student[courses][][name]">   # and ERB will automatically index the array for us. 
+  Course Topic: <input type="text" name="student[courses][][topic]">
 
+In Ruby to create a hash to store an array of hashes you would have to manually index the hash:
 
+  my_hash["student"]["courses"][0] = { "name" => "Intro to Computer Science", "topic" => "Computer Science" }
+  my_hash["student"]["courses"][1] = { "name" => "Databases", "topic" => "Computer Science"}
 
 
 
