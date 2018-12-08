@@ -104,9 +104,27 @@ In Ruby to create a hash to store an array of hashes you would have to manually 
   my_hash["student"]["courses"][1] = { "name" => "Databases", "topic" => "Computer Science"}
 
 
+So if you were to create a form:
 
+<form action="/new_student" method="POST">         	# USER VALUE:
+	<input name="student[name]" type="text">		# Kenneth R. Kutschera
+	<input name="student[year]" type="text">		# 1st year
+	<input name="student[age]" type="text">			# 27
 
+	<% 2.times do %>>
+		<input name="student[course][][name]" type="text">			# Database Systems	# Data Structures
+		<input name="student[course][][instructor]" type="text">	# Prof. Alex S.		# Prof. Oak
+		<input name="student[course][][day]" type="text">			# Tuesday			# Thursday
+		<input name="student[course][][time]" type="text">			# 8-10 pm 			# 5-8 pm
+	<% end %>>
 
+	<input tpye="submit" value="submit">
+</form>
+
+The key-value pair for this params would be: 
+params == student = {name => "Kenneth R. Kutschera", year => "1st year", age => "27", course => [{
+	name: "Database Systems", instructor: "Prof. Alex S.", day: "Tuesday", time: "8-10 pm"},
+	{name: "Data Structures", instructor: "Prof. Oak", day: "Thursday", time: "5-8 pm"}]}
 
 
 
