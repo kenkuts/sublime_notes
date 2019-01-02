@@ -18,9 +18,9 @@ This file is the common file required by config.ru. This is where
 there 2 ways to run the server meet.
 
 
-
-
-
+config.ru
+This file defines the stack of our web application. Thats going to start the server thats also going to respond to requests.
+The first thing config.ru need to do is load up an evirnoment.
 
 
 
