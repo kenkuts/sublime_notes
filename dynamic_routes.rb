@@ -151,4 +151,126 @@ Because beacuse it will evaluate 'post/new' as 'post/:id' and id => new.
 To avoid this we need to change the order in which the routers are setup.
 
 
+..............//// Routes and Controllers ////.....................
+
+
+
+Associations In Activerecord
+
+Whem associating two tables together remember to create a column for the child table with the corresponding id table name.
+Example if an article has multiple authors then the Articles table should have author_id as a foreign key column added to it.
+
+After declaring an added column to the child table remember to write the association in their models. The author should have
+has_many :aticles and the article should have belongs_to :author.
+The model with the belongs_to association has the foreign key. 
+
+
+
+Creating complex forms 
+
+When creating dynamic multiple checkboxes from a class.
+# Controller
+@pets = Pet.all
+
+# ERB
+<% @pets.each do |pet| %>
+  <input type="checkbox" name="owner[pet_ids]" value="<% pet.id %>" id="<% pet.id %>"
+  <%= "checked" if owner.pets.include?(pet) %> # This adds an extra touch where if the pet is already owned by the owner the checkbox will be checked.
+  ><%= pet.name %></input>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
