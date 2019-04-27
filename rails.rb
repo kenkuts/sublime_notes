@@ -127,6 +127,10 @@ in your urls, the route helpers will convert them so they can be read properly b
 items such as spaces or characters such as &, %, etc.
 
 Route helpers:
+resource routing rails:
+Resource routing allows you to quickly declare all of the common routes for a given resourceful controller. Instead of declaring separate routes
+for your index, show, new, edit, create, update and destroy actions, a resourceful route declares them in a single line of code.
+
 resources: :posts, only: [:index, :show]
 This route helper help us set up our posts routes by specifying that we are only using :index and :show. This will create the following
 routing methods for posts that we can utilize in our views controller.
@@ -165,15 +169,25 @@ If for any reason you dont like the naming structure for the methods or paths, y
 get '/posts', to: 'posts#index', as: :posts      					#=> posts_path
 get '/posts/:id', to: 'posts#show', as: :kens_special_path_route    #=> kens_special_path_route_path
 
+/////////////////////////////// CSRF
+
+Cross Site Request Forgery 
+
+You go to your bank website and log in. After checking your balance, you open up a new tab in the browser and go to your favorite meme site.
+
+Unbeknownst to you, the meme site is actually a hacking site that has scripts running in the background as soon as you land on their page.
+
+One of the scripts on the site hijacks the banking session that's open in the other browser tab and submits a form request to transfer money to their account.
+
+The banking form can't tell that the form request wasnt made by you, so it goes through the process as if you were the one who made the request.
 
 
-
-
-
-
-
-
-
+One site making a request to another site via a form is the general flow of a Cross-Site Request Forgery. 
+Rails blocks this from happening by default by requiring that a unique authenticity token be submitted with each form. 
+This authenticity token is stored in the session and cant be hijacked by hackers: it performs a match check when the 
+form is submitted, and it will throw an error if the token isnt there or doesnt match.
+To fix the InvalidAuthenticityToken error we can intergrate the form_authenticity_token helper into the form as a hidden field:
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
 
 

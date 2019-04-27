@@ -11,6 +11,7 @@
 \w+ing  # The \w means any word or character
 		# the + means one or more of whatever is the first letter or metacharacter
 		# the ing is just specific. 
+
 .scan(/\w+ing/) # will return an array of words with 'ing'
 
 # The ruby match method will return the first word that matches inside

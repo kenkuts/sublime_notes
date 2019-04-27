@@ -134,14 +134,6 @@ the act of your user id being removed from the session hash.
 The session hash is mostly used to store info like a users id which the web application will use to know who is the 'current user'
 and show that user the appropriate information. We can put anything we want on the session hash.
 
-Associations In Activerecord
-
-
-
-
-
-
-
 
 
 
