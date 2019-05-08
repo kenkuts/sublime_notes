@@ -68,7 +68,9 @@ This is because the 'form_tag' sends a nested hash that looks like:
 
 Thats why we add the require method when updating and we also add the permit method for the title and description in the nested hash. 
 
+=========================================================================================================================================================================
 
+Stong Params
 
 
 
