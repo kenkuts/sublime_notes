@@ -103,6 +103,90 @@ class Person < ActiveRecord::Base
   validates :not_a_robot, acceptance: true, message: "Humans only!"
 end
 
+==============================Validations in Controller Actions================================
+
+When a form is submitted, a full page load occurs as if you had navigated completely to
+a new URL. All of the variables set by the controllers new action disappear and are unavailable
+to the create action. 
+
+# app/controllers/posts_controller.rb
+ 
+  def create
+    # Create a brand new, unsaved, not-yet-validated Post object from the form.
+    @post = Post.new(post_params)
+ 	# User then types in values for the @post attributes then once the user clicks
+ 	# 'create post' the @post variable gets validated.
+
+    # Run the validations WITHOUT attempting to save to the database, returning
+    # true if the Post is valid, and false if it's not.
+    if @post.valid?
+      # If--and only if--the post is valid, do what we usually do.
+      @post.save
+      # This returns a status_code of 302, which instructs the browser to
+      # perform a NEW REQUEST! (AKA: throw @post away and let the show action
+      # worry about re-reading it from the database)
+      redirect_to post_path(@post)
+    else
+      # If the post is invalid, hold on to @post, because it is now full of
+      # useful error messages, and re-render the :new page, which knows how
+      # to display them alongside the user's entries.
+      render :new
+    end
+  end 
+
+'render' can be instructed to render the templates from other action. In the case
+of the code above we want to render the :new template from the same controller.
+
+When we redirect after a validation failure, we lose the instance of @post that has
+feedback in its errors attribute.
+
+If you hit refresh after a redirect/page load, your browser resubmits the GET request
+without complaint.
+
+If you hit Refresh after rendering on a form submit, your browser gives you a popup 
+to confirm that you want to resubmit form data with the POST request.
+
+
+============================== Validations with the form tag ===============================
+
+We will now let the user know and display errors once the user submits invalid data in our
+application. 
+
+
+Displaying all errors with 'errors.full_messages'
+-When a model fails validation, its errors attribute is filled with information about what went
+wrong. Rails creates an ActiveModel::Errors object to carry this information.
+
+The simplest way to show errors is to just spit them all out at the top of the form by iterating
+ over '@person.errors.full_messages'. But first, we will have to check whether there are errors to
+ display with '@person.errors.any?'.
+
+<% if @person.errors.any? %>
+  <div id="error_explanation">
+    <h2>There were some errors:</h2>
+    <ul>
+      <% @person.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>>
+
+Displaying per-filled errors with errors[].
+
+ActiveModel::Errors can also be used to access field-specific errors by interacting with it like a hash.
+If the field has errors, they will be returned in an array of strings.
+
+@person.errors[:name] #=> ['does not allow numbers']
+@person.errors[:email] #=> [] no error
+
+conditionally adding a class if there are errors:
+
+<div class="field<%= ' field_with_errors' if @person.errors[:name].any? %>">
+  <%= label_tag "name", "Name" %>>
+  <%= text_field_tag "name", @person.name %>>
+</div>
+
 
 
 
