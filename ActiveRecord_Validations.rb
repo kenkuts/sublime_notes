@@ -187,14 +187,53 @@ conditionally adding a class if there are errors:
   <%= text_field_tag "name", @person.name %>>
 </div>
 
+There is a deliberate space added in ' field_with_errors' in the example above. 
+If @person.errors[:name].any? validates to true, the goal here is to produce two 
+class names separated by a space (class=field field_with_errors). Without the added 
+	space, we would get class=fieldfield_with_errors instead!
 
 
+============================== Validations with the form for ===============================
+
+The biggest difference between the two helpers is that the form_for create a form specifically for a model
+object. form_for is full of convenient features.
+
+form_for automatically performs a route lookup to find the right URL for post.
+form_for takes a block. It passes an instance of FormBuilder as a parameter to the block
+which is what f is below:
+ 
+<%= form_for @post do |f| %>     #=> @post is the vairable
+  <%= f.text_field :title %>   
+  <%= f.text_area :content %>
+  <%= f.submit %>
+<% end %>
+
+Differnece between form_tag and form_for:
+form_tag doesnt know what action were going to use it for, because it has no model object to check. 
+form_for knows that an empty, unsaved model object needs a new form and a populated object needs an edit form. 
+This means we get to skip all of these steps:
+
+Setting the name and id of the <form> element.
+Setting the method to patch on edits.
+Setting the text of the <submit> element.
+Specifying the root parameter name (post[whatever]) for every field.
+Choosing the attribute (@post.whatever) to fill for every field.
 
 
+Perks of form_for:
+form_for inherits from FormBuilder which will pre-fill an existing Post objects
+data, it will also wrap the tag in a div with an error class if the field has failed
+validation(s):
 
+<div class="field_with_errors">
+  <input type="text" name="post[title]" id="post_title" value="Existing Post Title"/>
+</div>
 
+Drawbacks to this is:
 
-
+This can also result in some unexpected styling changes because <div> is a block tag 
+(which takes up the entire width of its container) while <input> is an inline tag. If
+your layout suddenly gets messed up when a field has errors, this is probably why.
 
 
 
