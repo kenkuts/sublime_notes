@@ -112,3 +112,40 @@ account       GET    /accounts/:id(.:format)      accounts#show
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
