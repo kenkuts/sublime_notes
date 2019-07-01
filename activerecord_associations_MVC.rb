@@ -184,9 +184,63 @@ are joined using has_many :through statements.
 
 
 
+ActiveRecord Specifying Relationship :=====================================================================
 
+If we want to rename a table in by using association in our activerecord models. We can do this by using
+the 'class_name' method.
 
+For example we would like to say that a 'Listing' model belongs to a specific type of user which is a host.
+inside of our model we would write something like.
 
+class Listing < ActiveRecord::Base
+	belongs_to :host, :class_name => "User"
+end	
+
+This would mean that "listings" table belongs to "host". 'host' which is a user table.
+For our user table we would need to specify which type of user has many listings.
+
+class User < ActiveRecord::Base
+	has_many :lisitngs, :foreign_key => 'host_id'
+end
+
+This would signify that our host user has many listings and listings belongs to a user with the :foreign_key => 'host_id'.
+
+Active Record Lifecycle Callbacks:===================================================================================
+
+In this model we have 2 callback methods that are declared with 
+class Post < ActiveRecord::Base
+ 
+  belongs_to :author
+  validate :is_title_case 
+ 
+  before_validation :make_title_case 
+ 
+# New Code!!
+  before_save :email_author_about_post
+ 
+  private
+ 
+  def is_title_case
+    if title.split.any?{|w|w[0].upcase != w[0]}
+      errors.add(:title, "Title must be in title case")
+    end
+  end
+ 
+  def make_title_case
+    self.title = self.title.titlecase
+  end
+
+  def email_the_author_about_post
+  	puts "We made changed to your title before we persisted the attributes to the database."
+  end
+end
+
+The 'before_validation' callback makes changes necessary to check the validation. In this model our before_validation
+method changes the posts input title into 'titlecase'. This means that the first letters of every word inside of our title
+is changed into capital letters. After changing the title it calls the validate method then persists the attribute into
+the database. 
+
+The 'email_author_about_post' is then called to notify the author that there were changes made before we saved it into the database.
 
 
 
