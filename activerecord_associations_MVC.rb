@@ -205,42 +205,55 @@ end
 
 This would signify that our host user has many listings and listings belongs to a user with the :foreign_key => 'host_id'.
 
-Active Record Lifecycle Callbacks:===================================================================================
 
-In this model we have 2 callback methods that are declared with 
-class Post < ActiveRecord::Base
- 
-  belongs_to :author
-  validate :is_title_case 
- 
-  before_validation :make_title_case 
- 
-# New Code!!
-  before_save :email_author_about_post
- 
-  private
- 
-  def is_title_case
-    if title.split.any?{|w|w[0].upcase != w[0]}
-      errors.add(:title, "Title must be in title case")
-    end
-  end
- 
-  def make_title_case
-    self.title = self.title.titlecase
-  end
 
-  def email_the_author_about_post
-  	puts "We made changed to your title before we persisted the attributes to the database."
-  end
+:source method=======================================================================================================
+
+When declaring relationships with other models and getting an attribute from them you can use the :source method.
+
+has_many :trip_listings, :through => :trips, :source => :listing
+
+This basically means that the parent class has_many :trip_listings through :trips which is associated with
+listings. The :source method means to look for an association called listing on the trips model. 
+
+When the parent class types in parent.trip_listings it will print out the listing through the trip class.
+
+
+Validation while Association:===========================================================================================
+
+We can declare both validation and assiciation in our models.
+An example is a Listing belongs_to a neighborhood but we can also validate its relationship with each other.
+
+class Listing < ActiveRecord::Base
+  belongs_to :neighborhood, required: true
+
+  required: true == validates :neighborhood_id, presence: true
 end
 
-The 'before_validation' callback makes changes necessary to check the validation. In this model our before_validation
-method changes the posts input title into 'titlecase'. This means that the first letters of every word inside of our title
-is changed into capital letters. After changing the title it calls the validate method then persists the attribute into
-the database. 
+When the :required method is set to true 
 
-The 'email_author_about_post' is then called to notify the author that there were changes made before we saved it into the database.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

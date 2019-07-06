@@ -217,7 +217,7 @@ Setting the name and id of the <form> element.
 Setting the method to patch on edits.
 Setting the text of the <submit> element.
 Specifying the root parameter name (post[whatever]) for every field.
-Choosing the attribute (@post.whatever) to fill for every field.
+Choosing the attribute (@post.whatever) fill for every field.
 
 
 Perks of form_for:
@@ -234,6 +234,9 @@ Drawbacks to this is:
 This can also result in some unexpected styling changes because <div> is a block tag 
 (which takes up the entire width of its container) while <input> is an inline tag. If
 your layout suddenly gets messed up when a field has errors, this is probably why.
+
+
+===========================Delete Requests==================================
 
 
 
