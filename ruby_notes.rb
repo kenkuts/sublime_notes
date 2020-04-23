@@ -27,12 +27,13 @@ end
 
 module BigModule
 	module LittleModule 
-		def ...
+		def ..
 		end
 	end
 
 	module TinyModule
-		def ....
+		def all
+			@@all
 		end
 	end
 end
@@ -41,6 +42,8 @@ end
 	We can also specify which module we will use as an instance method or as a class method
 	For example the person class will use the little modules for its instance methods and the
 	tinymodule for class methods.
+	
+	When we use the 'extend' keyword the class is going to use all of the methods inside of that module as class methods. Therefore when we declare methods to the module that we know are going to be used as class methods we can ommit the '.self' when declaring the methods. See 'TinyModule'
 =end
 class Person
 	include BigModule::LittleModule
@@ -86,11 +89,43 @@ a great example of what this is it contains most of our
 programs functionality.
 =end
 
+What is Encapsulation?
+Encapsulation is one of the fundamentals of OOP (object-oriented programming)
+It refers to the bundling of data with the methods that operate on that data.
+Encapsulation is used to hide the values or state of a structured data object
+inside a class, preventing unauthorized parties' direct access to them.'
 
 
+=====================Inheritance==========================
 
+class User (parentclass)
+	attr_accessor :fname, :lname
 
+	def initialize(fname, lname)
+		@fname = fname
+		@lname = lname
+	end
 
+	def log_in
+		@logged_in = true
+	end
+
+end
+
+class Student < User (subclass)
+	the Student class inherits from the User class thus making it
+	an inheritance. The Student class takes all of the methods and
+	attributes that the parent class has. 
+
+	def log_in
+		super
+		@in_class = true
+	end
+end
+
+In the .log_in method above, the super keyword will call on the .log_in method as defined in the super class. Then, the additional code that were adding into our Student .log_in method will also run. We have therefore supercharged our .log_in method, for the Student class only.
+
+The super keyword calls the parents class method with the same name. It will call the parent class method first then go to the subclasses method. 
 
 
 
